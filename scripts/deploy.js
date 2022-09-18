@@ -3,7 +3,6 @@ const mainContractNameProcessor = require("../main_scripts/mainContractNameProce
 
 (async ()=>{
   const contractName = mainContractNameProcessor.getMainContractName();
-  console.info(contractName);
 
   const contractFactory = await hre.ethers.getContractFactory(contractName);
   const contract = await contractFactory.deploy();
