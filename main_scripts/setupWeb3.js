@@ -2,21 +2,23 @@ require("dotenv").config();
 const Web3 = require("web3");
 const hardhatConfig = require("../hardhat.config");
 
-let endpoint;
+let endpointWss;
+let endpointHttps;
 let privateKey;
 
-
 if(hardhatConfig.defaultNetwork==="ganache"){
-    endpoint ="http://127.0.0.1:7545";
+    endpointWss = process.env.GANACHE_WS_ENDPOINT;
+    endpointHttps =process.env.GANACHE_HTTP_ENDPOINT;
     privateKey = process.env.PRIVATE_KEY_GANACHE;
 }
 
 else if(hardhatConfig.defaultNetwork==="goerli"){
-    endpoint ="https://goerli.infura.io/v3/ca671c43f773424da52a9d42c1bd3fc3";
+    endpointWss = process.env.INFURA_GOERLI_WSS_ENDPOINT;
+    endpointHttps = INFURA_GOERLI_HTTPS_ENDPOINT;
     privateKey = process.env.PRIVATE_KEY_GOERLI;
 }
 
-const web3 = new Web3(endpoint);
+const web3 = new Web3(endpointHttps);
 const account = web3.eth.accounts.privateKeyToAccount(privateKey);
 
 module.exports = {
