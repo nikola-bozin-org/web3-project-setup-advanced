@@ -1,3 +1,3 @@
 npm i
 
-add private key for goerli in hardhat.config.js
+add private key for goerli in .env
