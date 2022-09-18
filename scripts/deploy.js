@@ -1,13 +1,15 @@
 const hre = require("hardhat");
+const mainContractNameProcessor = require("../main_scripts/mainContractNameProcessor.js");
 
-async function main() {
-  const SimpleContractFactory = await hre.ethers.getContractFactory("SimpleContract");
-  const simpleContract = await SimpleContractFactory.deploy("0x6a04fac827DF78F652306cD547c6D90118F150CF");
+(async ()=>{
+  const contractName = mainContractNameProcessor.getMainContractName();
+  console.info(contractName);
 
-  await simpleContract.deployed();
-  console.info("Deployed SimpleContract at: " + simpleContract.address);
-}
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+  const contractFactory = await hre.ethers.getContractFactory(contractName);
+  const contract = await contractFactory.deploy();
+
+  await contract.deployed();
+  console.info("Deployed " + contractName + " at: " + contract.address);
+})();
+
+
