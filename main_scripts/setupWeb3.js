@@ -5,14 +5,15 @@ const hardhatConfig = require("../hardhat.config");
 let endpointWss;
 let endpointHttps;
 let privateKey;
+let network=hardhatConfig.defaultNetwork;
 
-if(hardhatConfig.defaultNetwork==="ganache"){
+if(network==="ganache"){
     endpointWss = process.env.GANACHE_WS_ENDPOINT;
     endpointHttps =process.env.GANACHE_HTTP_ENDPOINT;
     privateKey = process.env.PRIVATE_KEY_GANACHE;
 }
 
-else if(hardhatConfig.defaultNetwork==="goerli"){
+else if(network==="goerli"){
     endpointWss = process.env.INFURA_GOERLI_WSS_ENDPOINT;
     endpointHttps = INFURA_GOERLI_HTTPS_ENDPOINT;
     privateKey = process.env.PRIVATE_KEY_GOERLI;
@@ -25,4 +26,5 @@ module.exports = {
     web3,
     account,
     hardhatConfig,
+    network,
 }
